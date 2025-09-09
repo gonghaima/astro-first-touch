@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allPosts = Object.values(
+  import.meta.glob('../posts/*.md', { eager: true })
+);
 const tags = [
-  'astro',
-  'blogging',
-  'learning in public',
-  'successes',
-  'setbacks',
-  'community',
+  ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
 ];
 const pageTitle = 'Tag Index';
 ---
